@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/university_select_back/university_select_back",
+    "pages/university_select/university_select",
+    "pages/share/share",
+    "pages/user/user",
+    "pages/ziliao/ziliao",
+    "pages/shangchuan/shangchuan",
+    "pages/personal_order/personal_order"
+    ]
+}

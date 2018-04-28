@@ -1,0 +1,4 @@
+<block wx:for="{{file_list}}">
+  <view> {{index}}: </view>
+  <view> {{item}} </view>
+</block>

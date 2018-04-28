@@ -1,0 +1,29 @@
+<view class="container">
+<view class="choose">
+ <text></text>
+</view>
+<button class="bu" bindtap="chooseImage">选择本地文件</button>
+<view class="chooses" >
+        <view class="section__title" style="margin-bottom:3vh;margin-top:2vh;margin-left:35%;">是否选择公开</view>
+        <radio-group name="radio-group" class="yn">
+            <label class="lab"><radio value="radio1" />是</label>
+    
+            <label class="lab"><radio value="radio2"/>否</label>
+        </radio-group>
+    </view>
+<view class="chooses" >
+        <view class="section__title" style="margin-bottom:3vh;margin-top:2vh;margin-left:35%;">是否选择打印上门</view>
+        <radio-group name="radio-group" class="yn" bindchange="print_change">
+            <label class="lab"><radio value="True" />是</label>
+    
+            <label class="lab"><radio value="False"/>否</label>
+        </radio-group>
+    </view>
+<button class="bu" bindtap="check" name="file">上传</button>
+<view class="describe-input">
+      <input class="input" bindinput='DescribeInput' placeholder="请输入文件描述"   />
+</view>
+
+
+
+</view>

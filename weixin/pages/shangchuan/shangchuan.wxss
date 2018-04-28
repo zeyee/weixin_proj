@@ -1,0 +1,45 @@
+.container{
+  background-color: #fff;
+}
+.choose{
+  width:95%;
+  height: 20vh;
+  border: solid 1.5px #eee;
+  margin-top: 1.5vh;
+  margin-bottom: 2vh;
+  background-color: #fff;
+   font-size: 16px;
+  font-family: "微软雅黑";
+  color: gray;
+}
+.bu{
+  background-color: #eee;
+  width:95%;
+  height: 7vh;
+  font-size: 16px;
+  font-family: "微软雅黑";
+  color:gray;
+  margin-bottom: 2vh;
+}
+
+.yn{
+  color: gray;
+}
+.lab{
+margin-left: 16%;
+margin-top: 0vh;
+margin-right: 20%;
+
+}
+.chooses{
+ width:95%;
+  height: 18vh;
+  border: solid 1.5px #eee;
+  margin-top: 0vh;
+  margin-bottom: 1.8vh;
+  background-color: #fff;
+   font-size: 16px;
+  font-family: "微软雅黑";
+  color: gray; 
+  
+}

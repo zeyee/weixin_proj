@@ -1,0 +1,29 @@
+.container{
+  background-color: #eee;
+}
+.button{
+  width:99%;
+  background-color: #fff;
+  height: 8vh;
+ padding-left: 9%; 
+ margin-bottom: 0.2vh;
+ display: flex;
+ align-items: center;
+ 
+}
+#header{
+  width:99%;
+  background-color: #fff;
+  height: 15vh;
+ padding-left: 9%; 
+ margin-bottom: 0.2vh;
+ display: flex;
+ align-items: center;
+}
+.nav-default{
+  color: gray;
+  font-size:14px;
+}
+.nav{
+  text-decoration: underline;
+}

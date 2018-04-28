@@ -1,0 +1,17 @@
+.button{
+  width:98%;
+  height: 8vh;
+ padding-left: 9%; 
+ margin-bottom: 1vh;
+ display: flex;
+ align-items: center;
+ box-shadow: 2px 5px 5px #eee;
+}
+
+.nav-default{
+  color: gray;
+  font-size:14px;
+}
+.nav{
+  text-decoration: underline;
+}
