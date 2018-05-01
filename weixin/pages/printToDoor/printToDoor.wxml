@@ -1,0 +1,6 @@
+<view>
+<!--设置input value值为了点击确认后，reset输入框的内容-->
+  <input class="input" placeholder="请输入订单号" type="digit" bindinput='order_get' value="{{order_number}}"></input>
+  <input class="input" placeholder="请输入地址" type="text" bindinput='address_get' value="{{address}}"></input>
+  <button class="over" bindtap='confirm_info'>确认</button>
+</view>

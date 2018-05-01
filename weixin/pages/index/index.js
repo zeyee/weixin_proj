@@ -28,10 +28,16 @@ Page({
         
         // console.log(typeof res.data.resp)
         // console.log(typeof 'true')
-        if (res.data.resp){
-          wx.navigateTo({
-            url: '../share/share'
-          })
+        if (res.data.universityResp){
+            if (res.data.phoneNumberResp)
+              wx.navigateTo({
+                url: '../share/share',
+            })
+            else{
+              wx.navigateTo({
+                url: '../phoneNumber/phoneNumber',
+              })
+            }
         }
         else{
           wx.navigateTo({

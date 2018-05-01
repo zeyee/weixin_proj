@@ -78,7 +78,7 @@ Page({
     // do your job here
     // 跳转
     wx.redirectTo({
-      url: '../share/share'
+      url: '../phoneNumber/phoneNumber'
     })
   },
 

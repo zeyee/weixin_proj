@@ -5,7 +5,7 @@ Page({
     imageSrc: null,
     FileDescribe: '',
     nickName: '',
-    print_door: ''
+    ifShared: ''
   },
   
   onLoad: function () {
@@ -43,6 +43,7 @@ Page({
     })
     //console.log(this.FileDescribe)
   },
+
   chooseImage: function () {  //绑定的chooseImage控件
     var that = this
     wx.chooseImage({ // 选定图片
@@ -58,27 +59,57 @@ Page({
     })
   },
   
+  // 选择是否公开
+  radioChange: function(e){
+    console.log(e.detail.value)
+    if (e.detail.value == 'radio1'){
+      this.setData({
+        ifShared: 'True'
+      })
+    }
+    else{
+      console.log("不公开")
+      this.setData({
+        ifShared: 'False'
+      })
+      console.log(this.data.ifShared)
+    }
+  },
+
+  // 上传
   check: function (e) {  // 绑定的check button
     var that = this
     //console.log(that)
     //console.log(that.imageSrc)
+    console.log("adasdad")
+    console.log(e)
     wx.uploadFile({  // 上传图片
       url: 'http://127.0.0.1:5000/upload',
       name: 'picture',
       filePath: that.data.imageSrc,
       formData: {
-        'user': 'test',
         'FileDescribe': that.data.FileDescribe,
-        'print_door': that.data.print_door
+        'ifShared': that.data.ifShared
       },
       success: function (res) {
         console.log('imageSrc is:', that.data.imageSrc)
         console.log('uploadImage success, res is:', res)
         wx.showModal({
-          title: "图片详情",
-          content: res.data,
+          title: "消息",
+          content: "上传成功",
           showCancel: false,
-          confirmText: "确定"
+          confirmText: "确定",
+          // 成功则跳转至首页
+          success: function(res){
+            if (res.confirm){
+              wx.redirectTo({
+                url: '../share/share',
+              })
+            }
+            else{
+
+            }
+          }
         })
         that.setData({
           imageSrc: null

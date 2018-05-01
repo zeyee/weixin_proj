@@ -4,7 +4,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    file_list: []
+    messageList: [],
+    length: ''
   },
 
   /**
@@ -13,17 +14,29 @@ Page({
   onLoad: function () {
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:5000/personal_order', //仅为示例，并非真实的接口地址
-      
+      url: 'http://127.0.0.1:5000/myMessage', //仅为示例，并非真实的接口地址
+      data: {
+
+      },
       method: 'GET',
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data.file_name)
+        // console.log(typeof that.data.file_name)
+        // var tem_file_list = []
         that.setData({
-          file_list: res.data
+          messageList: res.data.messageList,
+          length: res.data.messageList.length
         })
-        /*for (var i = 0; i < res.data.length; i++){
-          that.data.file_list[i] = res.data[i]
-        }*/
+        console.log(typeof length)
+        /*for (var i = 0; i < res.data.file_name.length; i++){
+          tem_file_list[res.data.file_name[i]] = res.data.file_number[i]
+        }
+        console.log(tem_file_list)
+        that.setData({
+          file_name: tem_file_list,
+          file_number: res.data.file_number,
+          file_list: ['1', '2']
+        })*/
       }
     })
   },

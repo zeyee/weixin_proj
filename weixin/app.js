@@ -89,3 +89,10 @@ App({
     userInfo: null
   }
 })
+
+
+
+
+
+
+// javascript 语言中 this关键字的用法了。在javascript语言中，this代表着当前的对象，它在程序中随着执行的上下文随时会变化。

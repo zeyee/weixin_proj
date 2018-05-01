@@ -1,0 +1,14 @@
+.input{
+width: 60%;
+height: 100rpx; 
+border: 2rpx solid lightgray;
+padding-left: 50px;
+margin-left: 15%;
+margin-top: 50rpx
+}
+
+.over{
+  width: 40%;
+  margin-top: 50rpx;
+  margin-left: 30%
+}
