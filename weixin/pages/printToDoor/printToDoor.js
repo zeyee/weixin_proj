@@ -81,7 +81,7 @@ Page({
   confirm_info: function(){
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:5000/order_info',
+      url: 'http://149.28.29.169/order_info',
 
       method: 'POST',
 

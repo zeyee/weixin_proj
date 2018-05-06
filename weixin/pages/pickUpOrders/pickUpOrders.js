@@ -15,7 +15,7 @@ Page({
   onLoad: function () {
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:5000/pickUpOrders',
+      url: 'http://149.28.29.169/pickUpOrders',
 
       method: 'GET',
 
@@ -105,7 +105,7 @@ Page({
         console.log(res.confirm)
         if (res.confirm){
           wx.request({
-            url: 'http://127.0.0.1:5000/pickUpOrders',
+            url: 'http://149.28.29.169/pickUpOrders',
 
             method: 'POST',
 

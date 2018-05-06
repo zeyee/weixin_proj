@@ -46,7 +46,7 @@ App({
           success: function(res){
             console.log(res)
             wx.request({
-              url: "http://127.0.0.1:5000/login",
+              url: "http://149.28.29.169/login",
               method: "POST",
               data: {
                 user_name: nickName,

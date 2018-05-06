@@ -21,7 +21,7 @@ Page({
     var that = this
     // 将用户手机号码传回后端存储
     wx.request({
-      url: 'http://127.0.0.1:5000/phoneNumber',
+      url: 'http://149.28.29.169/phoneNumber',
 
       method: 'POST',
 

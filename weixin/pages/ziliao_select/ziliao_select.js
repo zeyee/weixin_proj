@@ -10,7 +10,7 @@ Page({
     var that = this
 
     wx.request({
-      url: 'http://127.0.0.1:5000/getShareFile',
+      url: 'http://149.28.29.169/getShareFile',
 
       data: {
 

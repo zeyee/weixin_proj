@@ -140,7 +140,7 @@ class userMessage(db.Model):
 # 创建数据库表
 # db.drop_all()
 db.create_all()
-"""
+
 html = '''
     <!DOCTYPE html>
     <title>Upload File</title>
@@ -150,7 +150,7 @@ html = '''
          <input type=submit value=上传>
     </form>
     '''
-"""
+
 """
 #获得学校的列表并插入数据库
 university_data = xlrd.open_workbook(r"C:\Users\wsc\Desktop\\xxx.xls")
@@ -180,7 +180,7 @@ def uploaded_file(filename):
                                filename)
 
 
-""""@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload_file1():
     if request.method == 'POST':
         print (request)
@@ -195,7 +195,7 @@ def upload_file1():
             #file_url = url_for('uploaded_file', filename=filename)
             return html
     return html
-"""
+
 # 上传文件
 @app.route('/upload', methods=['POST'])
 def upload_file():

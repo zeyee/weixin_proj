@@ -84,7 +84,7 @@ Page({
     console.log("adasdad")
     console.log(e)
     wx.uploadFile({  // 上传图片
-      url: 'http://127.0.0.1:5000/upload',
+      url: 'http://149.28.29.169/upload',
       name: 'picture',
       filePath: that.data.imageSrc,
       formData: {

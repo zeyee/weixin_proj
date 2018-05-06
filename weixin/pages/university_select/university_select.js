@@ -55,7 +55,7 @@ Page({
     console.log(value)
     // 将选择的学校名称传回服务端
     wx.request({
-      url: "http://127.0.0.1:5000/university_info",
+      url: "http://149.28.29.169/university_info",
 
       method: "POST",
 
