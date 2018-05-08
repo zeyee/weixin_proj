@@ -13,7 +13,7 @@ Page({
   bindViewTap: function () {
     // 从服务端获取是否已经选择过学校信息。
     wx.request({
-      url: 'http://149.28.29.169/check_university',
+      url: 'https://printgo.xyz/check_university',
 
       data: {
 

@@ -81,7 +81,7 @@ Page({
   confirm_info: function(){
     var that = this
     wx.request({
-      url: 'http://149.28.29.169/order_info',
+      url: 'https://printgo.xyz/order_info',
 
       method: 'POST',
 

@@ -15,7 +15,7 @@ Page({
   onLoad: function () {
     var that = this
     wx.request({
-      url: 'http://149.28.29.169/pickUpOrders',
+      url: 'https://printgo.xyz/pickUpOrders',
 
       method: 'GET',
 

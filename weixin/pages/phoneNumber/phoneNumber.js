@@ -21,7 +21,7 @@ Page({
     var that = this
     // 将用户手机号码传回后端存储
     wx.request({
-      url: 'http://149.28.29.169/phoneNumber',
+      url: 'https://printgo.xyz/phoneNumber',
 
       method: 'POST',
 

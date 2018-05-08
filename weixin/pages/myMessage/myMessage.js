@@ -14,7 +14,7 @@ Page({
   onLoad: function () {
     var that = this
     wx.request({
-      url: 'http://149.28.29.169/myMessage', //仅为示例，并非真实的接口地址
+      url: 'https://printgo.xyz/myMessage', //仅为示例，并非真实的接口地址
       data: {
 
       },

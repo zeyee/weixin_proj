@@ -9,7 +9,7 @@ Page({
     var that = this
     // 'GET’ 从服务器获得学校信息
     wx.request({
-      url: 'http://149.28.29.169/university_info',
+      url: 'https://printgo.xyz/university_info',
 
       data: {
 
