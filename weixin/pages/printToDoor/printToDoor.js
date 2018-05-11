@@ -1,3 +1,5 @@
+var utils = require('../../utils/util.js');
+
 Page({
 
   /**
@@ -7,64 +9,11 @@ Page({
     order_number: '',
     address: '',
     // isReceive 标识是否被接单。
-    isReceive: false
+    isReceive: false,
+    time: '',
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+  
 // 获取输入的订单编号
   order_get: function(e){
     this.setData({
@@ -79,16 +28,19 @@ Page({
   },
 // 确认信息,将订单编号和地址传回后端
   confirm_info: function(){
+    var openId = wx.getStorageSync('openId')
     var that = this
     wx.request({
       url: 'https://printgo.xyz/order_info',
-
+      //url: 'http://127.0.0.1:5000/order_info',
       method: 'POST',
 
       data: {
         order_number: that.data.order_number,
         address_info: that.data.address,
-        isReceive: that.data.isReceive
+        isReceive: that.data.isReceive,
+        openId: openId,
+        time: utils.formatTime(new Date())
       },
 
       header: {

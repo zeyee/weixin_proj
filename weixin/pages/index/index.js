@@ -1,86 +1,88 @@
-//index.js
-//获取应用实例
-const app = getApp()
 
+const app = getApp()
+var utils = require('../../utils/util.js');
 Page({
+  onShareAppMessage: function () {
+    return { title: "共享印" }
+  },
   data: {
-    motto: 'Hello World',
+    motto: '欢迎来到共享印',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    time: ''
   },
-  //事件处理函数
-  bindViewTap: function () {
-    // 从服务端获取是否已经选择过学校信息。
+ 
+  onLoad: function () {
+    var a = utils.formatTime(new Date())
+    console.log(typeof a)
+    console.log(wx.getStorageSync('openId'))
+  },
+  
+  bindGetUserInfo: function (e) {
+    var that = this
+    // console.log(e)
+    that.setData({
+      userInfo: e.detail.userInfo
+    })
+    wx.setStorageSync('userInfo', this.data.userInfo)
+    var openid = wx.getStorageSync('openId')
+    console.log(typeof openid)
     wx.request({
-      url: 'https://printgo.xyz/check_university',
+      url: 'https://www.printgo.xyz/getUserInfo',
+      //url: 'http://127.0.0.1:5000/getUserInfo',
 
-      data: {
-
+      data:{
+        nickName: that.data.userInfo['nickName'],
+        openId: openid
       },
-      
-      header:{
+
+      method: 'POST',
+
+      header: {
         'content-type': 'application/json'
       },
 
       success: function(res){
-        // 选择过则跳转至主页，否则选择学校信息。
-        
-        // console.log(typeof res.data.resp)
-        // console.log(typeof 'true')
-        if (res.data.universityResp){
-            if (res.data.phoneNumberResp)
-              wx.navigateTo({
-                url: '../share/share',
+        console.log(res)
+      }
+
+    })
+    wx.request({
+      url: 'https://www.printgo.xyz/check_university',
+      //url: 'http://127.0.0.1:5000/check_university',
+
+      data: {
+        openId: openid
+      },
+
+      header: {
+        'content-type': 'application/json'
+      },
+
+      success: function (res) {
+        console.log(res)
+        if (res.data.universityResp) {
+          if (res.data.phoneNumberResp)
+            wx.navigateTo({
+              url: '../share/share',
             })
-            else{
-              wx.navigateTo({
-                url: '../phoneNumber/phoneNumber',
-              })
-            }
+          else {
+            wx.navigateTo({
+              url: '../phoneNumber/phoneNumber',
+            })
+          }
         }
-        else{
+        else {
           wx.navigateTo({
             url: '../university_select_back/university_select_back'
           })
         }
+      },
+      fail: function(res){
+        console.log("检查错误")
+        // console.log(res)
       }
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
   }
 })

@@ -1,14 +1,24 @@
 .input{
-width: 60%;
-height: 100rpx; 
+width: 90%;
+height: 7vh; 
 border: 2rpx solid lightgray;
-padding-left: 50px;
-margin-left: 15%;
+border-radius: 15px;
+padding-left: 10px;
+margin-left: 2%;
 margin-top: 50rpx
 }
 
+
 .over{
-  width: 40%;
+  width: 90%;
+  background-color:  lightgray;
+   border-radius: 15px;
   margin-top: 50rpx;
-  margin-left: 30%
+  margin-left: 5%;
+ 
+}
+
+text{
+  color:gray;
+  
 }

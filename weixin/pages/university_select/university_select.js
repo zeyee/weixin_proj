@@ -8,24 +8,7 @@ Page({
 
   onLoad: function(options){
     var that = this
-    /*// 'GET’ 从服务器获得学校信息
-    wx.request({
-      url: 'http://127.0.0.1:5000/university_info',
-
-      data: {
-
-      },
     
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-
-      success: function(res){
-        that.setData({
-          university_list: res.data
-        })
-      }
-    })*/
     if (options && options.university_info) {
       var university_info = JSON.parse(options.university_info)
       that.setData({
@@ -44,23 +27,24 @@ Page({
   },
 
   // 转发函数,固定部分
-  wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作
-  wxSearchKeyTap: WxSearch.wxSearchKeyTap,  // 点击提示或者关键字、历史记录时的操作
-  wxSearchDeleteAll: WxSearch.wxSearchDeleteAll, // 删除所有的历史记录
-  wxSearchConfirm: WxSearch.wxSearchConfirm,  // 搜索函数
-  wxSearchClear: WxSearch.wxSearchClear,  // 清空函数
-
+  wxSearchInput: WxSearch.wxSearchInput,  
+  wxSearchKeyTap: WxSearch.wxSearchKeyTap, 
+  wxSearchDeleteAll: WxSearch.wxSearchDeleteAll, 
+  wxSearchConfirm: WxSearch.wxSearchConfirm,  
+  wxSearchClear: WxSearch.wxSearchClear, 
   // 搜索回调函数  
   mySearchFunction: function (value) {
     console.log(value)
-    // 将选择的学校名称传回服务端
+    var openId = wx.getStorageSync('openId')
     wx.request({
-      url: "https://printgo.xyz/university_info",
+      url: "https://www.printgo.xyz/university_info",
+      //url: 'http://127.0.0.1:5000/university_info',
 
       method: "POST",
 
       data: {
-        university: value
+        university: value,
+        openId: openId
       },
 
       header:{

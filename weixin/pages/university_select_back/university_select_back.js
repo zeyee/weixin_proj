@@ -7,12 +7,14 @@ Page({
   // 搜索页面跳回
   onLoad: function (options) {
     var that = this
+    var openId = wx.getStorageSync('openId')
     // 'GET’ 从服务器获得学校信息
     wx.request({
-      url: 'https://printgo.xyz/university_info',
+      url: 'https://www.printgo.xyz/university_info',
+      //url: 'http://127.0.0.1:5000/university_info',
 
       data: {
-
+        openId: openId
       },
 
       header: {

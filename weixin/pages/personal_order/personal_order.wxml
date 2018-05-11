@@ -1,4 +1,10 @@
+<view class='container'  style='background-image:url(/images/backinside.jpg)'>
 <block wx:for="{{file_list}}">
-  <view> {{index}}: </view>
-  <view> {{item}} </view>
+
+
+  <view class='message'>
+  <text style='font-size: 20px;font-family: "微软雅黑";color:black;display:block; margin-bottom:4vh' >历史上传</text>
+  <text> {{item}}</text> </view>
 </block>
+<view class='bar'></view>
+</view>

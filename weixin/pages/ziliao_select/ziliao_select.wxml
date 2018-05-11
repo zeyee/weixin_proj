@@ -5,7 +5,16 @@
       <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索入口" bindtap="wxSearchTab"/>
     </view>
   </view>
-</view>
+  </view>
+  <view class='container'  style='background-image:url(/images/backinside.jpg)'>
+
 <block wx:for="{{length}}">
-<view data-id="{{index}}"> {{fileNameList[length-index-1]}}</view>
+
+<view data-id="{{index}}" class='message'> 
+<text style='font-size: 20px;font-family: "微软雅黑";color:black;display:block; margin-bottom:4vh'>共享印</text>
+<text>{{fileNameList[length-index-1]}}</text>
+<button class='bu'>下载</button></view>
+
 </block>
+<view class='bar'></view>
+</view>

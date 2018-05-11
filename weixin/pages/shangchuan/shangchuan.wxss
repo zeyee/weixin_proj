@@ -1,5 +1,6 @@
-.container{
-  background-color: #fff;
+
+.describe-input{
+  width:100%;
 }
 .choose{
   width:95%;
@@ -13,12 +14,13 @@
   color: gray;
 }
 .bu{
-  background-color: #eee;
-  width:95%;
+  background-color: lightgray;
+  width:90%;
   height: 7vh;
-  font-size: 16px;
+  font-size: 18px;
   font-family: "微软雅黑";
   color:gray;
+  margin-top: 2vh;
   margin-bottom: 2vh;
 }
 
@@ -31,24 +33,25 @@ margin-top: 0vh;
 margin-right: 20%;
 
 }
-.chooses{
- width:95%;
-  height: 18vh;
-  border: solid 1.5px #eee;
+text{
+ 
+  
   margin-top: 0vh;
   margin-bottom: 1.8vh;
-  background-color: #fff;
-   font-size: 16px;
+  
+   font-size: 18px;
   font-family: "微软雅黑";
   color: gray; 
   
 }
 
+
 .input{
-width: 60%;
-height: 100rpx; 
+width: 90%;
+height: 7vh; 
 border: 2rpx solid lightgray;
-padding-left: 50px;
-margin-left: 15%;
+border-radius: 15px;
+padding-left: 10px;
+margin-left: 5%;
 margin-top: 50rpx
 }

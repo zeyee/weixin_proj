@@ -1,2 +1,33 @@
 @import "../../wxSearchView/wxSearchView.wxss";
 
+.container{
+  padding-top: 2vh;
+  background-color: #eee;
+  width: 100%;
+  
+  height: auto;
+  min-height: 100vh;
+}
+.message{
+  width: 88%;
+  height: 30vh;
+  padding-top: 2vh;
+  padding-left: 2%;
+  padding-right: 2%;
+
+  margin-left: 1%;
+
+margin-bottom: 3vh;
+ background-color: #eee;
+ border-radius: 10px;
+}
+text{
+   font-size: 14px;
+  font-family: "微软雅黑";
+  color:gray;
+ 
+}
+.bar{
+  width: 100%;
+  height: 5vh;
+}

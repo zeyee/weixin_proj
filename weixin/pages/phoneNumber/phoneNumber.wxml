@@ -1,6 +1,5 @@
 
-<!--个体用户并不能获取用户手机号码信息-->
-<!--<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> 获得用户的手机号</button>-->
+
 
 <input class="input" bindinput='getPhoneNumber' placeholder="请输入你的手机号码" value="{{phoneNumber}}"/>
 <button bindtap="transPhoneNumber">确认</button>

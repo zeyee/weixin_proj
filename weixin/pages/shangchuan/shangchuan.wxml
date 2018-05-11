@@ -1,20 +1,20 @@
-<view class="container">
-<view class="choose">
- <text>啊发发双方各</text>
+<view class="container"style='background-image:url(/images/backinside.jpg)'>
+<view class="describe-input">
+<input class="input" placeholder="请输入文件链接" ></input>
 </view>
-<button class="bu" bindtap="chooseImage">选择本地文件</button>
-<view class="chooses" >
-        <view class="section__title" style="margin-bottom:3vh;margin-top:2vh;margin-left:35%;">是否选择公开</view>
+<view class="describe-input">
+      <input class="input" bindinput='DescribeInput' placeholder="请输入文件描述"   />
+</view>
+<button class="bu" bindtap="chooseImage">选择本地照片</button>
+       <text style='text-align:center'>是否选择公开</text>
         <radio-group name="radio-group" class="yn" bindchange="radioChange">
             <label class="lab"><radio value="radio1" />是</label>
     
             <label class="lab"><radio value="radio2"/>否</label>
         </radio-group>
-    </view>
+    
 <button class="bu" bindtap="check" name="file">上传</button>
-<view class="describe-input">
-      <input class="input" bindinput='DescribeInput' placeholder="请输入文件描述"   />
-</view>
+
 
 
 

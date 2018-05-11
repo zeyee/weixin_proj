@@ -1,10 +1,4 @@
-/*Page({
-  getPhoneNumber: function (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
-  } 
-})*/
+
 
 Page({
   data:{
@@ -19,14 +13,17 @@ Page({
 
   transPhoneNumber: function(e){
     var that = this
+    var openId = wx.getStorageSync('openId')
     // 将用户手机号码传回后端存储
     wx.request({
       url: 'https://printgo.xyz/phoneNumber',
-
+      //url: 'http://127.0.0.1:5000/phoneNumber',
       method: 'POST',
 
       data:{
-        phoneNumber: that.data.phoneNumber
+        phoneNumber: that.data.phoneNumber,
+        openId: openId
+        
       },
 
       header:{
