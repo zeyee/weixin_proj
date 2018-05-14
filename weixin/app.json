@@ -12,6 +12,7 @@
     "pages/myMessage/myMessage",
     "pages/printToDoor/printToDoor",
     "pages/pickUpOrders/pickUpOrders",
-    "pages/ziliao_select/ziliao_select"
+    "pages/ziliao_select/ziliao_select",
+    "pages/ziliao_more_message/ziliao_more_message"
     ]
 }

@@ -5,15 +5,17 @@ border: 2rpx solid lightgray;
 border-radius: 15px;
 padding-left: 10px;
 margin-left: 2%;
-margin-top: 50rpx
+margin-bottom: 50rpx;
 }
 
 
 .over{
   width: 90%;
+  height: 7vh;
+  font-size: 18px;
   background-color:  lightgray;
    border-radius: 15px;
-  margin-top: 50rpx;
+
   margin-left: 5%;
  
 }
@@ -21,4 +23,7 @@ margin-top: 50rpx
 text{
   color:gray;
   
+}
+.container{
+  padding-top: 50rpx;
 }

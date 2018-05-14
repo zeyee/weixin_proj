@@ -14,6 +14,7 @@ App({
     userInfo: null
   },
   onLaunch: function () {
+    console.log("出问题了")
     wx.login({
       success: res => {
         // 发送 res.code 到微信服务器后台换取 openId, sessionKey, unionId
@@ -29,6 +30,7 @@ App({
           },
           // 将获得的openId， session_key发送到服务器。
           success: function(res){
+            console.log("没出问题")
             console.log(res)
             wx.setStorageSync('openId', res.data.openid)
             wx.request({
@@ -51,6 +53,10 @@ App({
                 console.log(res)
               }
             })
+          },
+          fail: function(res){
+            console.log(res)
+            console.log("出问题s了")
           }
         })
       }

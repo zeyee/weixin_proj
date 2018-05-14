@@ -12,8 +12,8 @@
 
 <view data-id="{{index}}" class='message'> 
 <text style='font-size: 20px;font-family: "微软雅黑";color:black;display:block; margin-bottom:4vh'>共享印</text>
-<text>{{fileNameList[length-index-1]}}</text>
-<button class='bu'>下载</button></view>
+<text bindtap='checkDetail' data-id="{{length-index}}">{{fileNameList[length-index-1]}}</text>
+<button class='bu' bindtap='downLoad' data-id="{{length-index}}">获取下载链接</button></view>
 
 </block>
 <view class='bar'></view>

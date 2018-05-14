@@ -3,4 +3,9 @@
   <input class="input" placeholder="请输入订单号" type="digit" bindinput='order_get' value="{{order_number}}"></input>
   <input class="input" placeholder="请输入地址" type="text" bindinput='address_get' value="{{address}}"></input>
   <button class="over" bindtap='confirm_info'><text>确认</text></button>
+  <button bindtap="chooseAddress">选择地址</button>
+  <text></text>
+  <text></text>
+  <text></text>
+  <text></text>
 </view>

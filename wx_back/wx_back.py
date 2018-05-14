@@ -1,32 +1,34 @@
 # -*- coding: utf-8 -*-
 import os
 import random
-
+import pymysql
 import time
-from flask import Flask, request, url_for, send_from_directory, json, jsonify
+
+import shutil
+from flask import Flask, request, url_for, send_from_directory, json, jsonify, render_template
 from werkzeug import secure_filename
 import os, sys, string
 from flask_sqlalchemy import SQLAlchemy
 import xlrd
 import chardet
+from flask_bootstrap import Bootstrap
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx'])
 
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 # 数据库的配置
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/wx_info'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@127.0.0.1:3306/wx_info'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # 文件保存目录的配置
-app.config['UPLOAD_FOLDER'] = "C:\Users\wsc\Desktop"
+app.config['UPLOAD_FOLDER'] = app.root_path
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 # 实例化
 db = SQLAlchemy(app, use_native_unicode='utf8')
-session_key = '';
-openId = '';
 
 # 用户的数据库表
 class User(db.Model):
@@ -38,12 +40,15 @@ class User(db.Model):
     session_key = db.Column(db.String(64), unique=True)
     university_name = db.Column(db.String(20))
     phoneNumber = db.Column(db.String(12))
+    userDirectory = db.Column(db.String(40), unique=True)
 
-    def __init__(self, user_name, openId, session_key, university_name, phoneNumber):  # 插入新值的方法
+    def __init__(self, user_name, openId, session_key, university_name, phoneNumber, userDirectory):  # 插入新值的方法
         self.user_name = user_name
         self.openId = openId
         self.session_key = session_key
         self.university_name = university_name
+        self.phoneNumber = phoneNumber
+        self.userDirectory = userDirectory
 
     def __repr__(self):
         return '<Role %r>' % self.user_name
@@ -54,7 +59,7 @@ class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     openId = db.Column(db.String(64))
     filename = db.Column(db.String(60))
-    fileNumber = db.Column(db.String(40))
+    fileNumber = db.Column(db.String(40), unique=True)
     isPrint = db.Column(db.Boolean)
     ifShared = db.Column(db.Boolean)
 
@@ -128,32 +133,30 @@ class userMessage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     openId = db.Column(db.String(64))
-    message = db.Column(db.TEXT)
+    # message = db.Column(db.TEXT)
+    orderNumber = db.Column(db.String(40))
+    fileName = db.Column(db.String(60))
+    isReceive = db.Column(db.Boolean)
+    time = db.Column(db.DateTime)
 
-    def __init__(self, openId, message):
+    def __init__(self, openId, orderNumber, fileName, isReceive, time):
         self.openId = openId
-        self.message = message
+        self.orderNumber = orderNumber
+        self.fileName = fileName
+        self.isReceive = isReceive
+        self.time = time
 
     def __repr__(self):
         return '<userMessage %r>' % self.id
 
 # 创建数据库表
-# db.drop_all()
+#db.drop_all()
 db.create_all()
 
-html = '''
-    <!DOCTYPE html>
-    <title>Upload File</title>
-    <h1>图片上传</h1>
-    <form method=post enctype=multipart/form-data>
-         <input type=file name=file>
-         <input type=submit value=上传>
-    </form>
-    '''
 
-"""
+'''
 #获得学校的列表并插入数据库
-university_data = xlrd.open_workbook(r"C:\Users\wsc\Desktop\\xxx.xls")
+university_data = xlrd.open_workbook(r"C:\Users\wsc\Documents\GitHub\weixin_proj\\xxx.xls")
 table = university_data.sheets()[0]
 nrows = table.nrows
 print (nrows)
@@ -166,10 +169,10 @@ for row in range(4, nrows):
         db.session.commit()
         university_list.append(colnames[1])
 print (len(university_list))
-"""
-
+'''
 
 def allowed_file(filename):
+    print (filename.rsplit('.', 1)[1] )
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
@@ -188,55 +191,64 @@ def upload_file1():
         print (request.values)
         # print (request.content)
         print (request.files)
-        file = request.files['picture']
+        file = request.files['file']
+        print(app.config['UPLOAD_FOLDER'])
+        print (file.filename)
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            filename = file.filename
+            file.save(app.config['UPLOAD_FOLDER'] + '/static/' + filename)
             #file_url = url_for('uploaded_file', filename=filename)
-            return html
-    return html
+            return render_template('index.html')
+    print (app.root_path)
+    print (app.instance_path)
+    return render_template('index.html')
 
 # 上传文件
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
-        global session_key
-        global openId
+        openId = request.form['openId']
+        user = User.query.filter_by(openId=openId).first()
+        print (type(user.userDirectory))
         ##### 存入用户文件夹
         # 不同用户单独文件夹存放文件
-        folder = os.path.exists(app.config['UPLOAD_FOLDER'] + "\\" + openId)
-        # openId 来标识用户的文件夹
-        print (app.config['UPLOAD_FOLDER'] + "\\" + openId)
+        folder = os.path.exists(app.config['UPLOAD_FOLDER'] + "/static/" + str(user.userDirectory))
+        # user.userDirectory 来标识用户的文件夹
+        print (folder)
         if not folder:
-            os.makedirs(app.config['UPLOAD_FOLDER'] + "\\" + openId)
+            os.makedirs(app.config['UPLOAD_FOLDER'] + "/static/" + user.userDirectory)
         #print (request.values)
-        print (request)
-        print (request.files)
-        print (type(request.form))
+        # print (request)
+        # print (request.files)
+        # print (type(request.form))
         # print (request.form['FileDescribe'])
         # print (request.values)
         # 获取传过来的文件
         file = request.files['picture']
         # 对同一用户的文件进行编号区分
-        FileDescribe = request.form['FileDescribe']
+        #FileDescribe = request.form['FileDescribe']
+        print (request.form)
+        filefolder = app.config['UPLOAD_FOLDER'] + "/static/" + user.userDirectory
         ifShared = request.form['ifShared']
+        upload_time = request.form['time']
+        linkDetail = str(request.form['linkDetail'])
+        print("asdasdadaf")
+        print linkDetail
+        fileName = linkDetail.split('/')
+        print (fileName)
+        fileName = fileName[4]
         if (ifShared=='False'):
             ifShared = False
         else:
             ifShared = True
         print (ifShared)
         print (request.form)
-        # file.filename[-4:] 从前端传来的文件名中提取扩展名
-        file_name = FileDescribe + file.filename[-4:]
-        #print (file.filename[-4:])
-        #print (file_name)
         # 文件编号的生成 利用当前时间和用户id和一个随机生成的4位数
         local_time = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))[2:]
-        user = User.query.filter_by(openId = openId).first()
         id = user.id
         fileNumber = local_time + str(id) + str(random.randint(1000, 9999))
         ### 文件存入数据库
-        file_info = File(openId=openId, filename=file_name, fileNumber=fileNumber, isPrint=False, ifShared=ifShared)
+        file_info = File(openId=openId, filename=fileName, fileNumber=fileNumber, isPrint=False, ifShared=ifShared)
         db.session.add(file_info)
         db.session.commit()
         ### 将文件存入目录
@@ -244,12 +256,13 @@ def upload_file():
         # print (a.filename)
         # print (a.openId)
         # 保存用户上传的文件至指定用户目录
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'] + "\\" + openId, file_name))
+        filePath = app.config['UPLOAD_FOLDER'] + "/static/" + str(fileName)
+        shutil.move(filePath, filefolder)
         #### 存入需要打印上门文件夹
 
         # 存入用户上传的消息至userMessage
-        message = user.user_name + "您好，您上传的" + file_name + "的订单号是" + fileNumber + "您可以用此来下单。谢谢您的使用。"
-        newMessage = userMessage(openId=openId, message=message)
+        # message = user.user_name + "您好，您上传的" + file_name + "的订单号是" + fileNumber + "您可以用此来下单。谢谢您的使用。"
+        newMessage = userMessage(openId=openId, orderNumber=fileNumber, fileName=fileName, isReceive=False, time=upload_time)
         db.session.add(newMessage)
         db.session.commit()
 
@@ -263,8 +276,8 @@ def login():
     print (request.form)
     print (request.values)
     user_name = json.loads(request.data)["user_name"]
-    global openId
-    global session_key
+    # global openId
+    # global session_key
     openId = json.loads(request.data)["openid"]
     session_key = json.loads(request.data)["session_key"]
     #user = User(user_name=user_name1, openId=openid, session_key=session_key)
@@ -272,26 +285,36 @@ def login():
     # db.session.commit()
     # 对是否已经登陆过的用户进行判断
     user_old = User.query.filter_by(openId=openId).first()
+    print (user_old)
     if (user_old):
-        # 更新nickName
-        user_old.user_name = user_name
+        # 老用户直接提交
         db.session.add(user_old)
         db.session.commit()
-        print (type(user_old))
-        print (user_old.id)
-        print (user_old.user_name)
-        print (user_old.openId)
     else:
-        user_new = User(user_name=user_name, openId=openId, session_key=session_key, university_name="", phoneNumber="")
+        local_time = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))[2:]
+        directoryName = local_time  + str(random.randint(1000, 9999))
+        print (directoryName)
+        print (type(directoryName))
+        user_new = User(user_name=user_name, openId=openId, session_key=session_key, university_name="", phoneNumber="", userDirectory=directoryName)
         db.session.add(user_new)
         db.session.commit()
     return "ok"
+
+@app.route('/getUserInfo', methods=['POST'])
+def getUserInfo():
+    openId = json.loads(request.data)['openId']
+    nickName = json.loads(request.data)['nickName']
+    user = User.query.filter_by(openId=openId).first()
+    user.user_name = nickName
+    db.session.add(user)
+    db.session.commit()
+    return ""
 
 # 获取手机号并存储
 @app.route('/phoneNumber', methods=['POST'])
 def getPhoneNumber():
     print (request.data)
-    global openId
+    openId = json.loads(request.data)['openId']
     phoneNumber = json.loads(request.data)['phoneNumber']
     currentUser = User.query.filter_by(openId=openId).first()
     currentUser.phoneNumber = phoneNumber
@@ -302,7 +325,7 @@ def getPhoneNumber():
 # 我的订单
 @app.route('/personal_order', methods=['GET'])
 def get_personal():
-    global openId
+    openId = str(request.values['openId'])
     filename = []
     personal_file = File.query.filter_by(openId = openId).all()
     print(len(File.query.filter_by(openId = openId).all()))
@@ -315,8 +338,9 @@ def get_personal():
 # 学校选择和获得学校信息
 @app.route('/university_info', methods=['GET', 'POST'])
 def university_info():
-    global openId
+
     if (request.method == 'GET'):
+        openId = str(request.values['openId'])
         university_result = db.session.query(University.university_name).all() # 返回列表中数据的类型 <class 'sqlalchemy.util._collections.result'>， 转为String
         university_info = []
 
@@ -336,6 +360,7 @@ def university_info():
        # print (jsonify(university_info))
         return jsonify(university_info = university_info)
     else:
+        openId = json.loads(request.data)['openId']
         User_info = User.query.filter_by(openId=openId).first()
         User_info.university_name = json.loads(request.data)['university']
         db.session.add(User_info)
@@ -347,7 +372,7 @@ def university_info():
 @app.route('/check_university', methods=['GET'])
 def check_university():
     # 获得openId
-    global openId
+    openId = str(request.values['openId'])
     user_info = User.query.filter_by(openId=openId).first()
     if (user_info.university_name == ""):
         #return jsonify(resp=False)
@@ -365,18 +390,26 @@ def check_university():
 @app.route('/myMessage', methods=['GET'])
 def get_message():
     # 获得openId
-    global openId
-    currentUserMessage = userMessage.query.filter_by(openId=openId).all()
-    messageList = []
+    # openId = json.loads(request.data)['openId']
+    openId = str(request.values['openId'])
+    currentUserMessage = userMessage.query.filter_by(openId=openId).order_by('time').all()
+    # messageList = []
+    fileNameList = []
+    orderNumberList = []
+    isReceiveList = []
+    timeList = []
     for message in currentUserMessage:
-        messageList.append(message.message)
+        fileNameList.append(message.fileName)
+        orderNumberList.append(message.orderNumber)
+        isReceiveList.append(message.isReceive)
+        timeList.append(message.time)
     # print (messageList)
-    return  jsonify(messageList=messageList)
+    return  jsonify(fileNameList=fileNameList, orderNumberList=orderNumberList, isReceiveList=isReceiveList, timeList=timeList)
 
 # 打印上门 prntToDoor响应
 @app.route('/order_info', methods=['POST'])
 def order_info():
-    global openId
+    openId = json.loads(request.data)['openId']
     print
     print(request.data)
     # 对用户输入的订单号进行检测
@@ -401,8 +434,9 @@ def order_info():
 # pickUpOrders （我要接单）界面的响应函数
 @app.route('/pickUpOrders', methods=['GET', 'POST'])
 def pickUpOrders():
-    global openId
+
     if (request.method=='GET'):
+        openId = str(request.values['openId'])
         fileListFromdb = Print.query.filter_by(isReceive=False).all()
         fileNumberList = []
         fileNameList = []
@@ -417,7 +451,13 @@ def pickUpOrders():
         return jsonify(fileNameList=fileNameList, fileNumberList=fileNumberList, addressList=addressList)
     else:
         print(request.data)
+        # 接受传过来的数据
+        openId = json.loads(request.data)['openId']
         orderNumber = json.loads(request.data)['fileNumber']
+        isReceive = json.loads(request.data)['isReceive']
+        time = json.loads(request.data)['time']
+
+        # 做出对应的修改
         order = Print.query.filter_by(orderNumber=orderNumber).first()
         current_user = User.query.filter_by(openId=openId).first()
         phoneNumber = current_user.phoneNumber
@@ -436,21 +476,60 @@ def pickUpOrders():
         fileOwnerOpenId = order.openId
         file = File.query.filter_by(fileNumber=orderNumber).first()
         message = "有用户接受了您的订单。订单信息为：订单号：" + orderNumber + "文件名：" + file.filename + "该用户手机号为" + phoneNumber
-        newUserMessage = userMessage(openId=fileOwnerOpenId, message=message)
+        # isReceive是为了区分上传时的消息，和被接单时的消息
+        newUserMessage = userMessage(openId=fileOwnerOpenId, orderNumber=orderNumber, fileName=file.filename, isReceive=isReceive, time=time)
         db.session.add(newUserMessage)
         db.session.commit()
         return ""
 
 # 资料共享的界面的数据获取
-@app.route('/getShareFile', methods=['GET'])
+@app.route('/getShareFile', methods=['GET', 'POST'])
 def getShareFile():
-    fileList = File.query.filter_by(ifShared=True).all()
-    length = len(fileList)
-    fileShareNameList = []
-    for file in fileList:
-        fileShareNameList.append(file.filename)
-    print (fileShareNameList)
-    return jsonify(fileShareNameList=fileShareNameList, length=length)
+    if (request.method == 'GET'):
+        fileList = File.query.filter_by(ifShared=True).all()
+        length = len(fileList)
+        fileShareNameList = []
+        fileNumberList = []
+        fileOwnerOpenId = []
+        for file in fileList:
+            fileShareNameList.append(file.filename)
+            fileNumberList.append(file.fileNumber)
+            fileOwnerOpenId.append(file.openId)
+        print (fileShareNameList)
+        print (fileNumberList)
+        print (fileOwnerOpenId)
+        return jsonify(fileShareNameList=fileShareNameList, length=length, fileNumberList=fileNumberList, fileOwnerOpenId=fileOwnerOpenId)
+    else:
+        fileName = json.loads(request.data)['fileName']
+        ownerOpenId = json.loads(request.data)['openId']
+        fileNumber = json.loads(request.data)['fileNumber']
+        print (fileName)
+        print (ownerOpenId)
+        print (fileNumber)
+        print (os.path.join(app.config['UPLOAD_FOLDER']))
+        return ""
+
+#响应用户的下载需求
+@app.route('/downLoad', methods=['GET'])
+def download_file():
+    print (request.values)
+    openId = request.values['openId']
+    fileNumber = request.values['fileNumber']
+    fileName = request.values['fileName']
+    print (openId)
+    print (fileNumber)
+    print (fileName)
+    # 获取用户的文件夹
+    user = User.query.filter_by(openId=openId).first()
+    fileDirectory = user.userDirectory
+    # 获取在后端文件所在的绝对路径
+    downloadPath = "/static/" + fileDirectory + '/' + fileName
+    #return send_from_directory(directory, fileName, as_attachment=True)
+    # 将文件复制到Flask项目的static目录
+    #shutil.copy(oldDirectory, directory)
+    # 提供链接给用户下载
+    return jsonify(Path='http://127.0.0.1:5000' + downloadPath)
+
 
 
 if __name__ == '__main__':

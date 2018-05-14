@@ -1,6 +1,6 @@
 <view class="container"style='background-image:url(/images/backinside.jpg)'>
 <view class="describe-input">
-<input class="input" placeholder="请输入文件链接" ></input>
+<input class="input" placeholder="请输入文件链接" bindinput='linkInput'></input>
 </view>
 <view class="describe-input">
       <input class="input" bindinput='DescribeInput' placeholder="请输入文件描述"   />

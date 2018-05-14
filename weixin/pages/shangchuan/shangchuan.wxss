@@ -6,7 +6,7 @@
   width:95%;
   height: 20vh;
   border: solid 1.5px #eee;
-  margin-top: 1.5vh;
+  
   margin-bottom: 2vh;
   background-color: #fff;
    font-size: 16px;
@@ -53,5 +53,8 @@ border: 2rpx solid lightgray;
 border-radius: 15px;
 padding-left: 10px;
 margin-left: 5%;
-margin-top: 50rpx
+margin-buttom: 50rpx；
+}
+.container{
+  padding-top: 1vh;
 }

@@ -10,6 +10,13 @@ Page({
     address: '',
     // isReceive 标识是否被接单。
     isReceive: false,
+    userName:'',
+    provinceName: '',
+    cityName: '',
+    countyName: '',
+    detailInfo: '',
+    nationalCode: '',
+    telNumber: '',
     time: '',
   },
 
@@ -71,6 +78,31 @@ Page({
 
       fail: function(res){
         console.log("失败!")
+      }
+    })
+  },
+  
+  chooseAddress: function(){
+    var that = this
+    wx.chooseAddress({
+      success: function (res) {
+        console.log(res.userName)
+        console.log(res.postalCode)
+        console.log(res.provinceName)
+        console.log(res.cityName)
+        console.log(res.countyName)
+        console.log(res.detailInfo)
+        console.log(res.nationalCode)
+        console.log(res.telNumber)
+        that.setData({
+          userName: res.userName,
+          provinceName: res.provinceName,
+          cityName: res.cityName,
+          countyName: res.countyName,
+          detailInfo: res.detailInfo,
+          nationalCode: res.nationalCode,
+          telNumber: res.telNumber
+        })
       }
     })
   }

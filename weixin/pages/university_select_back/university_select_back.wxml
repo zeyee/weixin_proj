@@ -1,8 +1,10 @@
+<view   class="container" style='background-image:url(/images/backinside.jpg)'>
 <view class="weui-search-bar">
   <view class="weui-search-bar__form">
     <view class="weui-search-bar__box">
       <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索入口" bindtap="wxSearchTab"/>
+      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="选择所在大学" bindtap="wxSearchTab"/>
     </view>
   </view>
+</view>
 </view>

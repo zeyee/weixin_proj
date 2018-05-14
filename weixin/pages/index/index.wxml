@@ -1,7 +1,7 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" >
 <view calss="image">
-<button class="alpharad" style="height:100vh; width:100%; background:url('/images/back.png');bcakground-repeat: no-repeat"  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button>
+<button class="alpharad" style="height:100vh; width:100%;background-image:url(/images/back.png);background-size:cover;"  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button>
   </view>
 
 </view>
