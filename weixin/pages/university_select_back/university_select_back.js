@@ -10,8 +10,8 @@ Page({
     var openId = wx.getStorageSync('openId')
     // 'GET’ 从服务器获得学校信息
     wx.request({
-      url: 'https://www.printgo.xyz/university_info',
-      //url: 'http://127.0.0.1:5000/university_info',
+      //url: 'https://www.printgo.xyz/university_info',
+      url: 'http://127.0.0.1:5000/university_info',
 
       data: {
         openId: openId

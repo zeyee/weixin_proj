@@ -19,8 +19,8 @@ Page({
     var openId = wx.getStorageSync('openId')
     var that = this
     wx.request({
-      url: 'https://printgo.xyz/pickUpOrders',
-      //url: 'http://127.0.0.1:5000/pickUpOrders',
+      //url: 'https://printgo.xyz/pickUpOrders',
+      url: 'http://127.0.0.1:5000/pickUpOrders',
       method: 'GET',
 
       data:{
@@ -68,8 +68,8 @@ Page({
         console.log(res.confirm)
         if (res.confirm){
           wx.request({
-            url: 'https://printgo.xyz/pickUpOrders',
-            //url: 'http://127.0.0.1:5000/pickUpOrders',
+            //url: 'https://printgo.xyz/pickUpOrders',
+            url: 'http://127.0.0.1:5000/pickUpOrders',
             method: 'POST',
 
             data: {

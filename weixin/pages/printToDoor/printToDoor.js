@@ -38,8 +38,8 @@ Page({
     var openId = wx.getStorageSync('openId')
     var that = this
     wx.request({
-      url: 'https://printgo.xyz/order_info',
-      //url: 'http://127.0.0.1:5000/order_info',
+      //url: 'https://printgo.xyz/order_info',
+      url: 'http://127.0.0.1:5000/order_info',
       method: 'POST',
 
       data: {

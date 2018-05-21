@@ -16,8 +16,8 @@ Page({
     var openId = wx.getStorageSync('openId')
     // 将用户手机号码传回后端存储
     wx.request({
-      url: 'https://printgo.xyz/phoneNumber',
-      //url: 'http://127.0.0.1:5000/phoneNumber',
+      //url: 'https://printgo.xyz/phoneNumber',
+      url: 'http://127.0.0.1:5000/phoneNumber',
       method: 'POST',
 
       data:{

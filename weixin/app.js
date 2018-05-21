@@ -34,8 +34,8 @@ App({
             console.log(res)
             wx.setStorageSync('openId', res.data.openid)
             wx.request({
-              url: "https://www.printgo.xyz/login",
-              //url: 'http://127.0.0.1:5000/login',
+              //url: "https://www.printgo.xyz/login",
+              url: 'http://127.0.0.1:5000/login',
 
               method: "POST",
 

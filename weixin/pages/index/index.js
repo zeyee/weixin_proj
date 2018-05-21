@@ -29,8 +29,8 @@ Page({
     var openid = wx.getStorageSync('openId')
     console.log(typeof openid)
     wx.request({
-      url: 'https://www.printgo.xyz/getUserInfo',
-      //url: 'http://127.0.0.1:5000/getUserInfo',
+      //url: 'https://www.printgo.xyz/getUserInfo',
+      url: 'http://127.0.0.1:5000/getUserInfo',
 
       data:{
         nickName: that.data.userInfo['nickName'],
@@ -49,8 +49,8 @@ Page({
 
     })
     wx.request({
-      url: 'https://www.printgo.xyz/check_university',
-      //url: 'http://127.0.0.1:5000/check_university',
+      //url: 'https://www.printgo.xyz/check_university',
+      url: 'http://127.0.0.1:5000/check_university',
 
       data: {
         openId: openid

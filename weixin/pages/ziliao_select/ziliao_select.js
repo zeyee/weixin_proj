@@ -12,8 +12,8 @@ Page({
     var that = this
 
     wx.request({
-      url: 'https://printgo.xyz/getShareFile',
-      //url: 'http://127.0.0.1:5000/getShareFile',
+      //url: 'https://printgo.xyz/getShareFile',
+      url: 'http://127.0.0.1:5000/getShareFile',
       data: {
 
       },

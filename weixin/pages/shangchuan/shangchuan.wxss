@@ -1,6 +1,8 @@
 
 .describe-input{
   width:100%;
+  margin-top: 2vh;
+  margin-bottom: 3vh;
 }
 .choose{
   width:95%;
@@ -20,7 +22,7 @@
   font-size: 18px;
   font-family: "微软雅黑";
   color:gray;
-  margin-top: 2vh;
+  margin-top: 3vh;
   margin-bottom: 2vh;
 }
 

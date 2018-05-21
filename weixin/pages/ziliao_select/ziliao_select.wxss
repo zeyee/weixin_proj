@@ -8,17 +8,20 @@
   height: auto;
   min-height: 100vh;
 }
+button[class="bu"]::after {
+  border: none;
+}
 .message{
-  width: 88%;
-  height: 30vh;
+  width: 92%;
+  height: 15vh;
   padding-top: 2vh;
   padding-left: 2%;
   padding-right: 2%;
 
-  margin-left: 1%;
+  margin-left: 2%;
 
 margin-bottom: 3vh;
- background-color: #eee;
+ 
  border-radius: 10px;
 }
 text{
@@ -30,4 +33,13 @@ text{
 .bar{
   width: 100%;
   height: 5vh;
+}
+.bu{
+
+}
+.little{
+  width: 100%;
+  height: 0.5vh;
+  background-color: lightgrey;
+  box-shadow: 1px #eee;
 }

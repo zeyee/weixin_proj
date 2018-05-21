@@ -1,11 +1,9 @@
 <view class="container"style='background-image:url(/images/backinside.jpg)'>
+
 <view class="describe-input">
-<input class="input" placeholder="请输入文件链接" bindinput='linkInput'></input>
+      <input class="input" bindinput='DescribeInput' placeholder="请输入文件编号"   />
 </view>
-<view class="describe-input">
-      <input class="input" bindinput='DescribeInput' placeholder="请输入文件描述"   />
-</view>
-<button class="bu" bindtap="chooseImage">选择本地照片</button>
+
        <text style='text-align:center'>是否选择公开</text>
         <radio-group name="radio-group" class="yn" bindchange="radioChange">
             <label class="lab"><radio value="radio1" />是</label>
@@ -13,7 +11,7 @@
             <label class="lab"><radio value="radio2"/>否</label>
         </radio-group>
     
-<button class="bu" bindtap="check" name="file">上传</button>
+<button class="bu" bindtap="check" name="file">确认打印</button>
 
 
 

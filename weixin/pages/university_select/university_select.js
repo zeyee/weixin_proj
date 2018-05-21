@@ -37,8 +37,8 @@ Page({
     console.log(value)
     var openId = wx.getStorageSync('openId')
     wx.request({
-      url: "https://www.printgo.xyz/university_info",
-      //url: 'http://127.0.0.1:5000/university_info',
+      //url: "https://www.printgo.xyz/university_info",
+      url: 'http://127.0.0.1:5000/university_info',
 
       method: "POST",
 

@@ -1,11 +1,12 @@
 
 .bu{
-  background: #eee;
+
   font-size: 16px;
-  color: darkblue;
+  color: gray;
   width:28%;
   height: 6vh;
   margin-top: 3vh;
+  background-color:lightgrey;
 }
 .container{
 
@@ -16,17 +17,18 @@
   min-height: 100vh;
 }
 .message{
-  width: 88%;
+  width: 92%;
   height: 30vh;
   padding-top: 2vh;
   padding-left: 2%;
   padding-right: 2%;
-
-  margin-left: 4%;
+background-color: #eee;
+  margin-left: 2%;
 
 margin-bottom: 3vh;
- background-color: #eee;
+ 
  border-radius: 10px;
+
 }
 text{
    font-size: 14px;
