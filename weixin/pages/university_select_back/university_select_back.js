@@ -1,4 +1,6 @@
 //university_select_back.js
+const app = getApp()
+
 Page({
   data: {
     university_list: []
@@ -11,7 +13,8 @@ Page({
     // 'GET’ 从服务器获得学校信息
     wx.request({
       //url: 'https://www.printgo.xyz/university_info',
-      url: 'http://127.0.0.1:5000/university_info',
+      //url: 'http://127.0.0.1:5000/university_info',
+      url: app.globalData.url + '/university_info',
 
       data: {
         openId: openId

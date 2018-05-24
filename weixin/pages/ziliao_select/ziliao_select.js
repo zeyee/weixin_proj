@@ -1,4 +1,4 @@
-//university_select_back.js
+const app = getApp()
 Page({
   data: {
     fileNameList: [],
@@ -13,7 +13,9 @@ Page({
 
     wx.request({
       //url: 'https://printgo.xyz/getShareFile',
-      url: 'http://127.0.0.1:5000/getShareFile',
+      //url: 'http://127.0.0.1:5000/getShareFile',
+      url: app.globalData.url + '/getShareFile',
+
       data: {
 
       },
@@ -54,7 +56,8 @@ Page({
     console.log(id)
     wx.request({
       //url: 'https://www.printgo.xyz/downLoad',
-      url: 'http://127.0.0.1:5000/downLoad',
+      //url: 'http://127.0.0.1:5000/downLoad',
+      url: app.globalData.url + '/downLoad',
 
       data: {
         openId: that.data.fileOwnerOpenId[id - 1],
@@ -105,8 +108,9 @@ Page({
     var id = e.currentTarget.dataset['id']
     console.log(e)
     wx.request({
-      url: 'https://www.printgo.xyz/downLoad',
+      //url: 'https://www.printgo.xyz/downLoad',
       //url: 'http://127.0.0.1:5000/downLoad',
+      url: app.globalData.url + '/downLoad',
 
       data: {
         openId: that.data.fileOwnerOpenId[id - 1],

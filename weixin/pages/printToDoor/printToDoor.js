@@ -1,5 +1,5 @@
 var utils = require('../../utils/util.js');
-
+const app = getApp()
 Page({
 
   /**
@@ -39,7 +39,9 @@ Page({
     var that = this
     wx.request({
       //url: 'https://printgo.xyz/order_info',
-      url: 'http://127.0.0.1:5000/order_info',
+      //url: 'http://127.0.0.1:5000/order_info',
+      url: app.globalData.url + '/order_info',
+      
       method: 'POST',
 
       data: {

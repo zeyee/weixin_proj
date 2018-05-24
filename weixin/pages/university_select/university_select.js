@@ -1,6 +1,6 @@
 // university_select.js
 var WxSearch = require('../../wxSearchView/wxSearchView.js');
-
+const app = getApp()
 Page({
   data:{
     university_list: []
@@ -38,7 +38,8 @@ Page({
     var openId = wx.getStorageSync('openId')
     wx.request({
       //url: "https://www.printgo.xyz/university_info",
-      url: 'http://127.0.0.1:5000/university_info',
+      //url: 'http://127.0.0.1:5000/university_info',
+      url: app.globalData.url + '/university_info',
 
       method: "POST",
 

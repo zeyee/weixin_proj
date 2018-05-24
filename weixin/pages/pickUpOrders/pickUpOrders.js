@@ -1,4 +1,4 @@
-
+const app = getApp()
 var utils = require('../../utils/util.js');
 
 Page({
@@ -20,7 +20,8 @@ Page({
     var that = this
     wx.request({
       //url: 'https://printgo.xyz/pickUpOrders',
-      url: 'http://127.0.0.1:5000/pickUpOrders',
+      //url: 'http://127.0.0.1:5000/pickUpOrders',
+      url: app.globalData.url + '/pickUpOrders',
       method: 'GET',
 
       data:{
@@ -69,7 +70,9 @@ Page({
         if (res.confirm){
           wx.request({
             //url: 'https://printgo.xyz/pickUpOrders',
-            url: 'http://127.0.0.1:5000/pickUpOrders',
+            //url: 'http://127.0.0.1:5000/pickUpOrders',
+            url: app.globalData.url + '/pickUpOrders',
+            
             method: 'POST',
 
             data: {

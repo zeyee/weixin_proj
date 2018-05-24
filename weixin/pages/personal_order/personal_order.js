@@ -1,3 +1,5 @@
+const app = getApp()
+
 Page({
 
   /**
@@ -15,7 +17,9 @@ Page({
     var openId = wx.getStorageSync('openId')
     wx.request({
       //url: 'https://printgo.xyz/personal_order', //仅为示例，并非真实的接口地址
-      url: 'http://127.0.0.1:5000/personal_order',
+      //url: 'http://127.0.0.1:5000/personal_order',
+      url: app.globalData.url + '/personal_order',
+
       data:{
         openId: openId
       },

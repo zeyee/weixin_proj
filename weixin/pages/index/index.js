@@ -1,6 +1,7 @@
 
 const app = getApp()
 var utils = require('../../utils/util.js');
+
 Page({
   onShareAppMessage: function () {
     return { title: "共享印" }
@@ -30,7 +31,8 @@ Page({
     console.log(typeof openid)
     wx.request({
       //url: 'https://www.printgo.xyz/getUserInfo',
-      url: 'http://127.0.0.1:5000/getUserInfo',
+      //url: 'http://127.0.0.1:5000/getUserInfo',
+      url: app.globalData.url + '/getUserInfo',
 
       data:{
         nickName: that.data.userInfo['nickName'],
@@ -50,7 +52,8 @@ Page({
     })
     wx.request({
       //url: 'https://www.printgo.xyz/check_university',
-      url: 'http://127.0.0.1:5000/check_university',
+      //url: 'http://127.0.0.1:5000/check_university',
+      url: app.globalData.url + '/check_university',
 
       data: {
         openId: openid

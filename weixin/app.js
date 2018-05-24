@@ -11,9 +11,12 @@ var city = ""
 var country = "" 
 App({
   globalData: {
-    userInfo: null
+    userInfo: null,
+    url: "https://www.printgo.xyz"
+    //url: "http://127.0.0.1:5000"
   },
   onLaunch: function () {
+    var that = this
     console.log("出问题了")
     wx.login({
       success: res => {
@@ -32,10 +35,12 @@ App({
           success: function(res){
             console.log("没出问题")
             console.log(res)
+            console.log(that.globalData.url)
             wx.setStorageSync('openId', res.data.openid)
             wx.request({
               //url: "https://www.printgo.xyz/login",
-              url: 'http://127.0.0.1:5000/login',
+              //url: 'http://127.0.0.1:5000/login',
+              url: that.globalData.url + '/login',
 
               method: "POST",
 
