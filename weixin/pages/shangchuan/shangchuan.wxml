@@ -1,19 +1,55 @@
-<view class="container"style='background-image:url(/images/backinside.jpg)'>
-
-<view class="describe-input">
-      <input class="input" bindinput='DescribeInput' placeholder="请输入文件编号"   />
-</view>
-
-       <text style='text-align:center'>是否选择公开</text>
-        <radio-group name="radio-group" class="yn" bindchange="radioChange">
-            <label class="lab"><radio value="radio1" />是</label>
-    
-            <label class="lab"><radio value="radio2"/>否</label>
-        </radio-group>
-    
-<button class="bu" bindtap="check" name="file">确认打印</button>
+<view class="container" style='background-image:url(/images/backinside.jpg)'>
 
 
+    <text>是否选择公开</text>
+    <radio-group name="radio-group" class="yn" bindchange="shareChange">
+        <label class="lab">
+            <radio value="radio1"/>
+            是</label>
 
+        <label class="lab">
+            <radio value="radio2"/>
+            否</label>
+    </radio-group>
+    <text>纸张类型</text>
+    <radio-group name="radio-group" class="yn" bindchange="paperChange">
+        <label class="lab">
+            <radio value="radio1"/>
+            黑白</label>
+
+        <label class="lab">
+            <radio value="radio2"/>
+            彩色</label>
+    </radio-group>
+    <text>纸张尺寸</text>
+    <radio-group name="radio-group" class="yn" bindchange="sizeChange">
+        <label class="lab">
+            <radio value="radio1"/>
+            A4</label>
+        <label class="lab">
+            <radio value="radio2"/>
+            A3</label>
+        <label class="lab">
+            <radio value="radio3"/>
+            B5</label>
+    </radio-group>
+    <text>装订方式</text>
+    <radio-group name="radio-group" class="yn" bindchange="bindingChange">
+        <label class="lab">
+            <radio value="radio1"/>
+            普通装订</label>
+        <label class="lab">
+            <radio value="radio2"/>
+            不装订</label>
+        <label class="lab">
+            <radio value="radio3"/>
+            皮纹纸装订</label>
+    </radio-group>
+    <view class="describe-input">
+        <input class="input" bindinput='DescribeInput' placeholder="请输入文件编号"/>
+    </view>
+
+ 
+    <button class="bu" bindtap="check" name="file">确认打印</button>
 
 </view>

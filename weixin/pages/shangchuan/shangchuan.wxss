@@ -27,17 +27,23 @@
 }
 
 .yn{
+
+
+
   color: gray;
+  margin-bottom: 3vh
+
 }
 .lab{
-margin-left: 16%;
+  margin-left: 3%;
+margin-right: 3%;
 margin-top: 0vh;
-margin-right: 20%;
+
 
 }
 text{
  
-  
+  margin-left: 3%;
   margin-top: 0vh;
   margin-bottom: 1.8vh;
   
@@ -51,10 +57,11 @@ text{
 .input{
 width: 90%;
 height: 7vh; 
-border: 2rpx solid lightgray;
+border: 2rpx solid gray;
 border-radius: 15px;
 padding-left: 10px;
 margin-left: 5%;
+margin-top: 5vh;
 margin-buttom: 50rpx；
 }
 .container{

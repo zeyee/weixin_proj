@@ -69,8 +69,18 @@
             color: floralwhite;
         }
     </style>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script type="text/javascript">
+        function myfun() {
+            alert("文件编号：{{ folderNumber }} 请在小程序输入相应的文件编号进行打印");
+        }
+
+        /*用window.onload调用myfun()*/
+        window.onload = myfun;//不要括号
+    </script>
+
 </head>
-<body onload>
+<body>
 <div class="container">
     <div class="tishi">
         <text>文件上传</text>

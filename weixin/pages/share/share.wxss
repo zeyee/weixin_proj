@@ -23,3 +23,8 @@
  align-items: center;
  
 }
+text{
+  text-align: center;
+ color: gray;
+  font-size:12px; 
+}

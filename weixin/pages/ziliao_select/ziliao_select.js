@@ -53,8 +53,8 @@ Page({
     var id = e.currentTarget.dataset['id']
     console.log(id)
     wx.request({
-      url: 'https://www.printgo.xyz/downLoad',
-      //url: 'http://127.0.0.1:5000/downLoad',
+      //url: 'https://www.printgo.xyz/downLoad',
+      url: 'http://127.0.0.1:5000/downLoad',
 
       data: {
         openId: that.data.fileOwnerOpenId[id - 1],

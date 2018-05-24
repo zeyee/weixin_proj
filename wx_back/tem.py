@@ -26,7 +26,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx'])
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 # 数据库的配置
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@127.0.0.1:3306/wx_info'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1:3306/wx_info'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # 文件保存目录的配置
 app.config['UPLOAD_FOLDER'] = app.root_path
@@ -168,7 +168,7 @@ db.create_all()
 
 '''
 #获得学校的列表并插入数据库
-university_data = xlrd.open_workbook(r"C:\\Users\wsc\Documents\GitHub\weixin_proj\\xxx.xls")
+university_data = xlrd.open_workbook(r"/usr/local/nginx/html/weixin_proj/xxx.xls")
 table = university_data.sheets()[0]
 nrows = table.nrows
 print (nrows)
@@ -604,7 +604,7 @@ def download_file():
     # 将文件复制到Flask项目的static目录
     #shutil.copy(oldDirectory, directory)
     # 提供链接给用户下载
-    return jsonify(Path='http://127.0.0.1:5000' + downloadPath)
+    return jsonify(Path='https://www.printgo.xyz' + downloadPath)
 
 
 
