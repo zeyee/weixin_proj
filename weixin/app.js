@@ -12,8 +12,8 @@ var country = ""
 App({
   globalData: {
     userInfo: null,
-    url: "https://www.printgo.xyz"
-    //url: "http://127.0.0.1:5000"
+    //url: "https://www.printgo.xyz"
+    url: "http://127.0.0.1:5000"
   },
   onLaunch: function () {
     var that = this

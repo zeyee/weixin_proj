@@ -10,7 +10,7 @@
 <text selectable='true'>"上传或接单时间：" {{timeList[length-index-1]}}</text>
 
 
-<button class='bu'>支付</button>
+<button class='bu' bindtap="showMessage">支付</button>
  </view>
 
 

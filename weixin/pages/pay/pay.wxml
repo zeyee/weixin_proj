@@ -1,6 +1,6 @@
 <view class = "container">
   <view class = "payimg">
-    <image src = "/images/go.png">aaa</image>
+    <textarea>温馨提示：因无法调用微信支付接口，此功能将在后期实现</textarea>
   </view>
   <view class = "paynum">请支付{{money}}元</view>
   <button class = "paysucced" bindtap = "reshare">确定</button>

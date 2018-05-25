@@ -47,6 +47,25 @@ Page({
     })
   },
 
-  
+  showMessage: function(){
+    wx.showModal({
+      title: "消息",
+      content: "因无法调用微信支付接口，此功能将在后期实现",
+      showCancel: false,
+      confirmText: "确定",
+      // 成功则跳转至首页
+      success: function (res) {
+        if (res.confirm) {
+          wx.redirectTo({
+            url: '../share/share'
+          })
+        }
+        else {
+
+        }
+      }
+    })
+
+  }
 
 })
