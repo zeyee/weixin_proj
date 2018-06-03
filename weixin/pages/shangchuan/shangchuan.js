@@ -118,13 +118,15 @@ Page({
           confirmText: "确定",
           // 成功则跳转至首页
           success: function (res) {
-            if (res.confirm) {
+            if (moneyAll != "0") {
               wx.redirectTo({
                 url: '../pay/pay' + '?money='+ moneyAll
               })
             }
             else {
-
+              that.setData({
+                FileDescribe: ""
+              })
             }
           }
         })

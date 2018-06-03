@@ -1,6 +1,6 @@
 
 
-<view class='container'style='background-image:url(/images/backinside.jpg)'>
+<view class='container'style='background-image:url(https://www.printgo.xyz/static/image/backinside.jpg)'>
 <input class="input" bindinput='getPhoneNumber' placeholder="请输入你的手机号码" value="{{phoneNumber}}" style='background-color:#eee;width:90%;height:7vh;margin-left:5%;border-radius:10px;'/>
 <button bindtap="transPhoneNumber" style='width:90%;backgound-color:lightgray;border-radius:10px;height:7vh;margin-top:2vh' >确认</button>
 

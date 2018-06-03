@@ -1,4 +1,4 @@
-<view   class="container" style='background-image:url(/images/backinside.jpg)'>
+<view   class="container" style='background-image:url(https://www.printgo.xyz/static/image/backinside.jpg)'>
 <view class="weui-search-bar">
   <view class="weui-search-bar__form">
     <view class="weui-search-bar__box">

@@ -43,6 +43,7 @@ Page({
           length: res.data.fileNameList.length
         })
         console.log(typeof length)
+        console.log(that.data.isReceiveList[0])
       }
     })
   },
