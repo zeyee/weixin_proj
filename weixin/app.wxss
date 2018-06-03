@@ -6,7 +6,7 @@
   width:28%;
   height: 6vh;
   margin-top: 3vh;
-  background-color:lightgrey;
+  background-color:#eee;
 }
 .container{
 

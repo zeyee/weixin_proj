@@ -8,9 +8,7 @@
   height: auto;
   min-height: 100vh;
 }
-button[class="bu"]::after {
-  border: none;
-}
+
 .message{
   width: 92%;
   height: 15vh;
