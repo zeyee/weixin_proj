@@ -103,7 +103,8 @@ Page({
           countyName: res.countyName,
           detailInfo: res.detailInfo,
           nationalCode: res.nationalCode,
-          telNumber: res.telNumber
+          telNumber: res.telNumber,
+          address:res.provinceName+res.cityName+res.countyName+res.detailInfo
         })
       }
     })

@@ -26,7 +26,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx'])
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 # 数据库的配置
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@127.0.0.1:3306/wx_info'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1:3306/wx_info'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # 文件保存目录的配置
 app.config['UPLOAD_FOLDER'] = app.root_path
@@ -150,6 +150,7 @@ class userMessage(db.Model):
     fileName = db.Column(db.String(60))
     isReceive = db.Column(db.Boolean)
     time = db.Column(db.DateTime)
+    phoneNumber = db.Column(db.String(12))
 
     def __init__(self, openId, orderNumber, fileName, isReceive, time):
         self.openId = openId
@@ -168,7 +169,7 @@ db.create_all()
 
 '''
 #获得学校的列表并插入数据库
-university_data = xlrd.open_workbook(r"C:\\Users\wsc\Documents\GitHub\weixin_proj\\xxx.xls")
+university_data = xlrd.open_workbook(r"/usr/local/nginx/html/weixin_proj/xxx.xls")
 table = university_data.sheets()[0]
 nrows = table.nrows
 print (nrows)
@@ -333,7 +334,7 @@ def upload_file():
 
             # 存入用户上传的消息至userMessage
             # message = user.user_name + "您好，您上传的" + file_name + "的订单号是" + fileNumber + "您可以用此来下单。谢谢您的使用。"
-            newMessage = userMessage(openId=openId, orderNumber=fileNumber, fileName=fileName, isReceive=False, time=upload_time)
+            newMessage = userMessage(openId=openId, orderNumber=fileNumber, fileName=fileName, isReceive=False, time=upload_time, phoneNumber="")
             db.session.add(newMessage)
             db.session.commit()
             return jsonify(message="打印成功", money=str(moneyAll))
@@ -423,7 +424,7 @@ def university_info():
             # 编码问题，中文的显示问题，并处理返回列表中的数据类型不能解码的问题
             info_string = str(info)
             # 切片索引提取学校的名字
-            university_info.append(info_string[3:len(info_string)-3] )
+            university_info.append(info_string[2:len(info_string)-3] )
        # print ("学校信息: ")
        # print (db.session.query(University.university_name))
        # print (len(university_info))
@@ -473,13 +474,15 @@ def get_message():
     orderNumberList = []
     isReceiveList = []
     timeList = []
+    phoneNumberList = []
     for message in currentUserMessage:
         fileNameList.append(message.fileName)
         orderNumberList.append(message.orderNumber)
         isReceiveList.append(message.isReceive)
         timeList.append(message.time)
+        phoneNumberList.append(message.phoneNumber)
     # print (messageList)
-    return  jsonify(fileNameList=fileNameList, orderNumberList=orderNumberList, isReceiveList=isReceiveList, timeList=timeList)
+    return  jsonify(fileNameList=fileNameList, orderNumberList=orderNumberList, isReceiveList=isReceiveList, timeList=timeList, phoneNumberList=phoneNumberList)
 
 # 打印上门 prntToDoor响应
 @app.route('/order_info', methods=['POST'])
@@ -553,7 +556,7 @@ def pickUpOrders():
         file = File.query.filter_by(fileNumber=orderNumber).first()
         message = "有用户接受了您的订单。订单信息为：订单号：" + orderNumber + "文件名：" + file.filename + "该用户手机号为" + phoneNumber
         # isReceive是为了区分上传时的消息，和被接单时的消息
-        newUserMessage = userMessage(openId=fileOwnerOpenId, orderNumber=orderNumber, fileName=file.filename, isReceive=isReceive, time=time)
+        newUserMessage = userMessage(openId=fileOwnerOpenId, orderNumber=orderNumber, fileName=file.filename, isReceive=isReceive, time=time, phoneNumber=phoneNumber)
         db.session.add(newUserMessage)
         db.session.commit()
         return ""
@@ -604,7 +607,7 @@ def download_file():
     # 将文件复制到Flask项目的static目录
     #shutil.copy(oldDirectory, directory)
     # 提供链接给用户下载
-    return jsonify(Path='http://127.0.0.1:5000' + downloadPath)
+    return jsonify(Path='https://www.printgo.xyz' + downloadPath)
 
 
 

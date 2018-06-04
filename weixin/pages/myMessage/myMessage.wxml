@@ -1,17 +1,27 @@
 <view class='container' style='background-image:url(https://www.printgo.xyz/static/image/backinside.jpg)'>
 <block wx:for="{{fileNameList.length}}">
 
-<view  class='message'>
-<text style='font-size: 20px;font-family: "微软雅黑";color:black;display:block; margin-bottom:4vh' >共享印</text>
+<view  class='message' wx:if="{{isReceiveList[length-index-1]==true}}">
+<text style='font-size: 20px;font-family: "微软雅黑";color:black;display:block; margin-bottom:4vh' >你被接单啦</text>
 <text selectable='true'>"文件名：" {{fileNameList[length-index-1]}}</text>
 <text selectable='true'>"订单号：" {{orderNumberList[length-index-1]}}</text>
-<text selectable='true'>"是否被接单：" "{{isReceiveList[length-index-1]}}"</text>
+<text selectable='true'></text>
+<text selectable='true'>"上传或接单时间：" {{timeList[length-index-1]}}</text>
+<text selectable='true'>"接单用户联系方式：" {{phoneNumberList[length-index-1]}}</text>
+
+
+<button class='bu' bindtap="showMessage">支付</button>
+ </view>
+<view  class='message' wx:if="{{isReceiveList[length-index-1]==false}}">
+<text style='font-size: 20px;font-family: "微软雅黑";color:black;display:block; margin-bottom:4vh' >上传成功！</text>
+<text selectable='true'>"文件名：" {{fileNameList[length-index-1]}}</text>
+<text selectable='true'>"订单号：" {{orderNumberList[length-index-1]}}</text>
+
 <text selectable='true'>"上传或接单时间：" {{timeList[length-index-1]}}</text>
 
 
 <button class='bu' bindtap="showMessage">支付</button>
  </view>
-
 
 </block>
 <view class='bar'></view>

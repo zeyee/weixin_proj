@@ -12,6 +12,7 @@ Page({
     orderNumberList: [],
     isReceiveList: [],
     timeList: [],
+    phoneNumberList: [],
     length: ''
   },
 
@@ -40,6 +41,7 @@ Page({
           orderNumberList: res.data.orderNumberList,
           isReceiveList: res.data.isReceiveList,
           timeList: res.data.timeList,
+          phoneNumberList: res.data.phoneNumberList,
           length: res.data.fileNameList.length
         })
         console.log(typeof length)
